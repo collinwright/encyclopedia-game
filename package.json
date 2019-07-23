@@ -2,7 +2,13 @@
   "scripts": {
     "start": "parcel src/index.html"
   },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
   "devDependencies": {
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.5",
     "parcel": "^1.12.3",
     "prettier": "^1.18.2",
     "tslint": "^5.18.0",
