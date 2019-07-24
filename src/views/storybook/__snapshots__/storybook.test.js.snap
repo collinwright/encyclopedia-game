@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Links Link text repeated 1`] = `
+Array [
+  "We display ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    hyperlink
+  </a>,
+  "s, but only the first occurence of the word becomes a hyperlink.",
+]
+`;
+
+exports[`Storyshots Links Multiple links 1`] = `
+Array [
+  "Would you like a ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    red
+  </a>,
+  ", ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    blue
+  </a>,
+  ", or ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    orange
+  </a>,
+  " ball?",
+]
+`;
+
+exports[`Storyshots Links Multiple links with repeats 1`] = `
+Array [
+  "Would you like a ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    red
+  </a>,
+  ", ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    blue
+  </a>,
+  ", or ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    orange
+  </a>,
+  " ball? Red balls are bouncy, blue balls are soft, and orange balls are big.",
+]
+`;
+
+exports[`Storyshots Links Text with a single link 1`] = `
+Array [
+  "Here is a ",
+  <a
+    href="#"
+    onClick={[Function]}
+  >
+    hyperlink
+  </a>,
+  ".",
+]
+`;
+
+exports[`Storyshots Links Text with no links 1`] = `"Hello, world!"`;

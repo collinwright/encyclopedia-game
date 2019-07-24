@@ -9,7 +9,10 @@ export const LinkedText = (props: {
   const links = React.useContext(Context);
   const elements = React.useMemo(() => {
     const indices = links
-      .map(link => [props.children.indexOf(link), link])
+      .map((link: string): [number, string] => [
+        props.children.indexOf(link),
+        link
+      ])
       .sort((a: [number, string], b: [number, string]) => a[0] - b[0]);
 
     const elements = [];
@@ -22,6 +25,7 @@ export const LinkedText = (props: {
 
       elements.push(
         <a
+          key={offset}
           href="#"
           onClick={event => {
             event.preventDefault();
