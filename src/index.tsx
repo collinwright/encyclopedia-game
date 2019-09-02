@@ -4,18 +4,20 @@ import * as ReactDOM from "react-dom";
 import { Article } from "./views";
 import { Server } from "./wikimedia";
 
-const main = () => {
+import "./index.css";
+
+const App = () => {
+  return (
+    <Server apiUrl="https://en.wikipedia.org/w/api.php">
+      <Article startingTitle="Dog" onNewArticle={title => console.log(title)} />
+    </Server>
+  );
+};
+
+window.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
   if (root == null) {
     throw new Error("Could not find root element");
   }
-
-  ReactDOM.render(
-    <Server apiUrl="https://en.wikipedia.org/w/api.php">
-      <Article title="Cat" />
-    </Server>,
-    root
-  );
-};
-
-window.addEventListener("DOMContentLoaded", main);
+  ReactDOM.render(<App />, root);
+});

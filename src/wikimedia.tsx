@@ -1,7 +1,7 @@
 import * as React from "react";
 import wiki from "wikijs";
 
-export const Api = React.createContext(undefined);
+export const Api = React.createContext<ReturnType<typeof wiki>>(wiki());
 
 export const Server = (props: { apiUrl: string; children: any }) => {
   const api = React.useMemo(() => wiki({ apiUrl: props.apiUrl }), []);
