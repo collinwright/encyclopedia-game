@@ -1,15 +1,21 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Article } from "./views";
+import { Article, Path } from "./views";
 import { Server } from "./wikimedia";
 
 import "./index.css";
 
 const App = () => {
+  const [visited, setVisited] = React.useState<string[]>([]);
+
   return (
     <Server apiUrl="https://en.wikipedia.org/w/api.php">
-      <Article startingTitle="Dog" onNewArticle={title => console.log(title)} />
+      <Path startingTitle="Dog" endingTitle="Wolf" visited={visited} />
+      <Article
+        startingTitle="Dog"
+        onNewArticle={title => setVisited([...visited, title])}
+      />
     </Server>
   );
 };
