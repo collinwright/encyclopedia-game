@@ -10,7 +10,7 @@ const WIKIMEDIA_ROOT_URL =
 const parcel = new Bundler("src/index.html");
 const application = express();
 
-["/wiki/", "/w/"].forEach(stub => {
+["/wiki/", "/w/", "/api/"].forEach(stub => {
   application.use(
     stub,
     proxy({
