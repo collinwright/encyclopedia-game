@@ -15,9 +15,9 @@ export default (props: {
     <button
       className="new-game-button"
       onClick={async () => {
-        props.dispatch({ type: "RESET" });
+        props.dispatch({ type: "BEGAN_LOADING_COURSE" });
         const [start, end] = await wiki.random(2);
-        props.dispatch({ type: "NEW_COURSE", data: { start, end } });
+        props.dispatch({ type: "LOADED_COURSE", data: { start, end } });
       }}
     >
       {props.children}

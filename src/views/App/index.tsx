@@ -13,6 +13,7 @@ export default () => {
   return (
     <Server apiUrl="/w/api.php">
       <NewGameButton dispatch={dispatch}>New game</NewGameButton>
+      {state.loading && "Loading..."}
       {state.course && (
         <Path
           startingTitle={state.course.start}

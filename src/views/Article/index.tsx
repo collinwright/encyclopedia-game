@@ -24,7 +24,11 @@ export default (props: {
       onLoad={event => {
         const contentWindow =
           event.currentTarget && event.currentTarget.contentWindow;
-        if (props.onNewArticle != null && contentWindow != null) {
+        if (
+          props.onNewArticle != null &&
+          contentWindow != null &&
+          contentWindow.location.pathname != "blank"
+        ) {
           props.onNewArticle(pathnameToTitle(contentWindow.location.pathname));
         }
       }}
