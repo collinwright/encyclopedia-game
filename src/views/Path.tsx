@@ -21,7 +21,11 @@ export default (props: {
                 ? "ending-title"
                 : "";
 
-            return <li className={className}>{title}</li>;
+            return (
+              <li key={title} className={className}>
+                {title}
+              </li>
+            );
           })}
         </ol>
       </div>
