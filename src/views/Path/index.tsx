@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import "./Path.css";
+import "./style.css";
 
 export default (props: {
   startingTitle: string;
