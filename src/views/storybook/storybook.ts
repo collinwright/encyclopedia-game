@@ -1,5 +1,5 @@
 import { configure } from "@storybook/react";
 
-import "../Article/Links.stories.tsx";
+import "../Article/stories.tsx";
 
 configure(() => {}, module);
