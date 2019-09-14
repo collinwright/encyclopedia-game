@@ -17,7 +17,7 @@ export default (props: {
 }) => {
   return (
     <iframe
-      className="wikimedia"
+      className="wikimedia-article"
       src={titleToPathname(props.startingTitle)}
       onLoad={event => {
         const contentWindow =
