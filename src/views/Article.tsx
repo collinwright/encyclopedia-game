@@ -3,12 +3,12 @@ import * as React from "react";
 import "./Article.css";
 
 const titleToPathname = (title: string) =>
-  `/wiki/${encodeURIComponent(title.replace(" ", "_"))}`;
+  `/wiki/${encodeURIComponent(title.replace(new RegExp(" ", "g"), "_"))}`;
 
 const pathnameToTitle = (pathname: string) => {
   const lastSlash = pathname.lastIndexOf("/");
   const encodedTitle = pathname.substring(lastSlash + 1);
-  return decodeURIComponent(encodedTitle.replace("_", " "));
+  return decodeURIComponent(encodedTitle).replace(new RegExp("_", "g"), " ");
 };
 
 export default (props: {
