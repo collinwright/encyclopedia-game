@@ -12,13 +12,15 @@ const pathnameToTitle = (pathname: string) => {
 };
 
 export default (props: {
-  startingTitle: string;
+  startingTitle: string | null;
   onNewArticle?: (title: string) => unknown;
 }) => {
   return (
     <iframe
       className="wikimedia-article"
-      src={titleToPathname(props.startingTitle)}
+      src={
+        props.startingTitle ? titleToPathname(props.startingTitle) : undefined
+      }
       onLoad={event => {
         const contentWindow =
           event.currentTarget && event.currentTarget.contentWindow;

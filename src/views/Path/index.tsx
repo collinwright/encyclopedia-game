@@ -8,7 +8,7 @@ export default (props: {
   visited: string[];
 }) => {
   return (
-    <div>
+    <div className="article-path">
       <div>
         From <span className="starting-title">{props.startingTitle}</span> to{" "}
         <span className="ending-title">{props.endingTitle}</span>

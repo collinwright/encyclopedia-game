@@ -1,0 +1,24 @@
+body {
+  margin: 1rem;
+}
+
+#root {
+  width: calc(100vw - 2rem);
+  height: calc(100vh - 2rem);
+  display: grid;
+  grid-template-columns: 24rem;
+}
+
+.new-game-button {
+  grid-row: 1;
+}
+
+.article-path {
+  grid-row: 2;
+}
+
+.wikimedia-article {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column-start: 2;
+}
