@@ -13,7 +13,12 @@ body {
   display: flex;
   flex-direction: column;
   width: 24em;
-  padding: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+#root #controls h1 {
+  margin-top: 0;
 }
 
 #root #content {

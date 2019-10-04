@@ -18,6 +18,7 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
   return (
     <>
       <div id="controls">
+        <h1>The Encyclopedia Game</h1>
         {state.loading &&
           "Finding a random pair of articles which are close to one another..."}
 
