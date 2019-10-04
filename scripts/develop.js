@@ -22,5 +22,6 @@ const application = express();
   );
 });
 
+console.log(`Starting development server at http://localhost:${PORT}`);
 application.use(parcel.middleware());
 application.listen(PORT);
