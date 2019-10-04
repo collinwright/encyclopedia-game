@@ -16,28 +16,32 @@ export default (props: { apiEndpoint?: string | null }) => {
 
   return (
     <>
-      <button
-        className="new-game-button"
-        onClick={async () => {
-          dispatch({ type: "BEGAN_LOADING_COURSE" });
-          const [start, end] = await wikimedia.findArticlePair();
-          dispatch({ type: "LOADED_COURSE", data: { start, end } });
-        }}
-      >
-        New game
-      </button>
-      {state.loading && "Loading..."}
-      {state.course && (
-        <Path
-          startingTitle={state.course.start}
-          endingTitle={state.course.end}
-          visited={state.visited}
+      <div id="controls">
+        <button
+          className="new-game-button"
+          onClick={async () => {
+            dispatch({ type: "BEGAN_LOADING_COURSE" });
+            const [start, end] = await wikimedia.findArticlePair();
+            dispatch({ type: "LOADED_COURSE", data: { start, end } });
+          }}
+        >
+          New game
+        </button>
+        {state.loading && "Loading..."}
+        {state.course && (
+          <Path
+            startingTitle={state.course.start}
+            endingTitle={state.course.end}
+            visited={state.visited}
+          />
+        )}
+      </div>
+      <div id="content">
+        <Article
+          startingTitle={state.course && state.course.start}
+          onNewArticle={title => dispatch({ type: "DID_VISIT", data: title })}
         />
-      )}
-      <Article
-        startingTitle={state.course && state.course.start}
-        onNewArticle={title => dispatch({ type: "DID_VISIT", data: title })}
-      />
+      </div>
     </>
   );
 };

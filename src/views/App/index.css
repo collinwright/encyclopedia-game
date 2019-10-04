@@ -5,20 +5,19 @@ body {
 #root {
   width: calc(100vw - 2rem);
   height: calc(100vh - 2rem);
-  display: grid;
-  grid-template-columns: 24rem;
+  display: flex;
+  flex-direction: row;
 }
 
-.new-game-button {
-  grid-row: 1;
+#root #controls {
+  display: flex;
+  flex-direction: column;
+  width: 24em;
+  padding: 0.5em;
 }
 
-.article-path {
-  grid-row: 2;
-}
-
-.wikimedia-article {
-  grid-row-start: 1;
-  grid-row-end: 3;
-  grid-column-start: 2;
+#root #content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
