@@ -24,6 +24,8 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
 
         {state.course && <Path course={state.course} visited={state.visited} />}
 
+        <hr />
+
         <button
           className="new-game-button"
           disabled={state.loading}
@@ -41,6 +43,15 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
         >
           New game
         </button>
+
+        <hr />
+
+        <p>
+          I'm not affiliated with Wikipedia, but consider{" "}
+          <a href="https://donate.wikimedia.org/">
+            donating to the Wikimedia Foundation!
+          </a>
+        </p>
       </div>
       <div id="content">
         <Article
