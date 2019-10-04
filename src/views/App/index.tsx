@@ -47,6 +47,14 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
         <hr />
 
         <p>
+          You can{" "}
+          <a href="https://github.com/collinwright/encyclopedia-game">
+            check out the source code
+          </a>
+          .
+        </p>
+
+        <p>
           I'm not affiliated with Wikipedia, but consider{" "}
           <a href="https://donate.wikimedia.org/">
             donating to the Wikimedia Foundation!

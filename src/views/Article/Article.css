@@ -1,5 +1,5 @@
 iframe.wikimedia-article {
-  width: 100%;
+  width: calc(100% - 0.5rem);
   height: 100%;
   border: none;
   outline: 1px solid black;

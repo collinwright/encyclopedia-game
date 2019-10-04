@@ -1,5 +1,9 @@
 body {
-  margin: 1rem;
+  margin: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 #root {
@@ -12,9 +16,8 @@ body {
 #root #controls {
   display: flex;
   flex-direction: column;
-  width: 24em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  width: 24rem;
+  padding-right: 1rem;
 }
 
 #root #controls h1 {
@@ -24,5 +27,5 @@ body {
 #root #content {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 1.5rem);
 }
