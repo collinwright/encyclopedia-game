@@ -5,12 +5,12 @@ const Bundler = require("parcel-bundler");
 const LOG_LEVEL = process.env.LOG_LEVEL || "info";
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const WIKIMEDIA_ROOT_URL =
-  process.env.WIKIMEDIA_ROOT_URL || "https://en.wikipedia.org";
+  process.env.WIKIMEDIA_ROOT_URL || "https://en.m.wikipedia.org";
 
 const parcel = new Bundler("src/index.html");
 const application = express();
 
-["/wiki/", "/w/", "/api/"].forEach(stub => {
+["/wiki/", "/w/", "/api/", "/static/"].forEach(stub => {
   application.use(
     stub,
     proxy({
