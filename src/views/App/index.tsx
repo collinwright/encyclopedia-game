@@ -1,38 +1,35 @@
 import * as React from "react";
 
 import { Article, Path } from "../";
-import createWikimediaClient from "../../external/wikimedia";
+import createWikimediaClient, { Options } from "../../external/wikimedia";
 
 import "./index.css";
 
 import { reducer, emptyState } from "../../model";
 
-export default (props: { apiEndpoint?: string | null }) => {
+export default (props: { wikimediaOptions?: Partial<Options> }) => {
   const [state, dispatch] = React.useReducer(reducer, undefined, emptyState);
   const wikimedia = React.useMemo(
-    () => createWikimediaClient({ apiEndpoint: props.apiEndpoint }),
-    [props.apiEndpoint]
+    () => createWikimediaClient(props.wikimediaOptions || {}),
+    [props.wikimediaOptions]
   );
 
   return (
     <>
       <div id="controls">
-        {state.loading && "Finding articles to move between..."}
+        {state.loading &&
+          "Finding a random pair of articles which are close to one another..."}
 
-        {state.course && (
-          <Path
-            startingTitle={state.course.start}
-            endingTitle={state.course.end}
-            visited={state.visited}
-          />
-        )}
+        {state.course && <Path course={state.course} visited={state.visited} />}
 
         <button
           className="new-game-button"
           onClick={async () => {
             dispatch({ type: "BEGAN_LOADING_COURSE" });
-            const [start, end] = await wikimedia.findArticlePair();
-            dispatch({ type: "LOADED_COURSE", data: { start, end } });
+            dispatch({
+              type: "LOADED_COURSE",
+              data: await wikimedia.findArticlePair()
+            });
           }}
         >
           New game

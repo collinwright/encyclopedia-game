@@ -1,12 +1,9 @@
+import { ArticlePair } from "../external/wikimedia";
+
 export interface State {
-  course: Course | null;
+  course: ArticlePair | null;
   visited: string[];
   loading: boolean;
-}
-
-export interface Course {
-  start: string;
-  end: string;
 }
 
 export const emptyState = (): State => ({
