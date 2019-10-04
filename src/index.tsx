@@ -8,5 +8,9 @@ window.addEventListener("DOMContentLoaded", () => {
   if (root == null) {
     throw new Error("Could not find root element");
   }
-  ReactDOM.render(<App />, root);
+  ReactDOM.render(<App wikimediaOptions={{}} />, root);
 });
+
+if (module.hot) {
+  module.hot.accept();
+}

@@ -14,5 +14,9 @@ export default (state: State, action: Action): State => {
     return { ...emptyState(), loading: true };
   }
 
+  if (action.type === "CRITICAL_ERROR") {
+    return emptyState();
+  }
+
   return state;
 };

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { hot } from "react-hot-loader";
 
 import { Article, Path } from "../";
 import createWikimediaClient, { Options } from "../../external/wikimedia";
@@ -7,10 +8,10 @@ import "./index.css";
 
 import { reducer, emptyState } from "../../model";
 
-export default (props: { wikimediaOptions?: Partial<Options> }) => {
+export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
   const [state, dispatch] = React.useReducer(reducer, undefined, emptyState);
   const wikimedia = React.useMemo(
-    () => createWikimediaClient(props.wikimediaOptions || {}),
+    () => createWikimediaClient(props.wikimediaOptions),
     [props.wikimediaOptions]
   );
 
@@ -24,12 +25,17 @@ export default (props: { wikimediaOptions?: Partial<Options> }) => {
 
         <button
           className="new-game-button"
+          disabled={state.loading}
           onClick={async () => {
             dispatch({ type: "BEGAN_LOADING_COURSE" });
-            dispatch({
-              type: "LOADED_COURSE",
-              data: await wikimedia.findArticlePair()
-            });
+            try {
+              dispatch({
+                type: "LOADED_COURSE",
+                data: await wikimedia.findArticlePair()
+              });
+            } catch (_) {
+              dispatch({ type: "CRITICAL_ERROR" });
+            }
           }}
         >
           New game
@@ -43,4 +49,4 @@ export default (props: { wikimediaOptions?: Partial<Options> }) => {
       </div>
     </>
   );
-};
+});

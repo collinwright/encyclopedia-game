@@ -5,11 +5,13 @@
     "storybook": "concurrently 'parcel serve src/views/storybook/storybook.html --port 4321' 'start-storybook --preview-url=http://localhost:4321/iframe.html --config-dir src/views/storybook/'"
   },
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.0.0",
+    "react-dom": "npm:@hot-loader/react-dom",
     "wikijs": "^5.5.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.6.2",
+    "@hot-loader/react-dom": "^16.9.0",
     "@storybook/addon-actions": "^5.1.9",
     "@storybook/addon-storyshots": "^5.1.9",
     "@storybook/react": "^5.2.0-beta.7",
@@ -17,6 +19,7 @@
     "@types/node": "^12.6.8",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.5",
+    "@types/webpack-env": "^1.14.0",
     "babel-loader": "^8.0.6",
     "concurrently": "^4.1.1",
     "express": "^4.17.1",
@@ -26,6 +29,7 @@
     "parcel": "^1.12.3",
     "parcel-bundler": "^1.12.3",
     "prettier": "^1.18.2",
+    "react-hot-loader": "^4.12.14",
     "react-test-renderer": "^16.8.6",
     "ts-jest": "^24.0.2",
     "tslint": "^5.18.0",
@@ -39,5 +43,13 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     }
+  },
+  "babelConfig": {
+    "presets": [
+      "env"
+    ],
+    "plugins": [
+      "react-hot-loader/babel"
+    ]
   }
 }
