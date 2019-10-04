@@ -10,8 +10,12 @@ export default (props: {
   return (
     <div className="article-path">
       <div>
-        From <span className="starting-title">{props.startingTitle}</span> to{" "}
-        <span className="ending-title">{props.endingTitle}</span>
+        Starting from{" "}
+        <span className="starting-title">{props.startingTitle}</span>, find{" "}
+        <span className="ending-title">{props.endingTitle}</span>.
+        <br />
+        <br />
+        You have visited:
         <ol className="visited-titles">
           {props.visited.map(title => {
             const className =

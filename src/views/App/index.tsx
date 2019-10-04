@@ -17,6 +17,16 @@ export default (props: { apiEndpoint?: string | null }) => {
   return (
     <>
       <div id="controls">
+        {state.loading && "Finding articles to move between..."}
+
+        {state.course && (
+          <Path
+            startingTitle={state.course.start}
+            endingTitle={state.course.end}
+            visited={state.visited}
+          />
+        )}
+
         <button
           className="new-game-button"
           onClick={async () => {
@@ -27,14 +37,6 @@ export default (props: { apiEndpoint?: string | null }) => {
         >
           New game
         </button>
-        {state.loading && "Loading..."}
-        {state.course && (
-          <Path
-            startingTitle={state.course.start}
-            endingTitle={state.course.end}
-            visited={state.visited}
-          />
-        )}
       </div>
       <div id="content">
         <Article
