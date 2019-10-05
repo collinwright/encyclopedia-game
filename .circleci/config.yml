@@ -7,17 +7,15 @@ jobs:
 
     steps:
       - checkout
-
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
-
-      - run: yarn install
-
+      - run: yarn install --freeze
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
+      - run: yarn format --check
       - run: yarn build
