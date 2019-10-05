@@ -1,7 +1,6 @@
-iframe.wikimedia-article {
+.wikimedia-article {
   width: calc(100% - 0.5rem);
   height: 100%;
   border: none;
   outline: 1px solid black;
-  overflow: hidden;
 }

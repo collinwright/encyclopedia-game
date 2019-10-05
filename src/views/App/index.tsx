@@ -3,10 +3,10 @@ import { hot } from "react-hot-loader";
 
 import { Article, Path } from "../";
 import createWikimediaClient, { Options } from "../../external/wikimedia";
+import { reducer, emptyState } from "../../model";
 
 import "./index.css";
-
-import { reducer, emptyState } from "../../model";
+import useTrueVerticalHeight from "./useTrueVerticalHeight";
 
 export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
   const [state, dispatch] = React.useReducer(reducer, undefined, emptyState);
@@ -15,8 +15,10 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
     [props.wikimediaOptions]
   );
 
+  const container = useTrueVerticalHeight<HTMLDivElement>("--vh", []);
+
   return (
-    <>
+    <div id="container" ref={container}>
       <div id="controls">
         <h1>The Encyclopedia Game</h1>
         {state.loading &&
@@ -67,6 +69,6 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
           onNewArticle={title => dispatch({ type: "DID_VISIT", data: title })}
         />
       </div>
-    </>
+    </div>
   );
 });
