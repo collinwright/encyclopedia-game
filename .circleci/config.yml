@@ -1,5 +1,6 @@
 ---
-version: 2
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -18,4 +19,38 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
 
       - run: yarn format --check
-      - run: yarn build
+
+      - run: mkdir -p /tmp/workspace
+      - run: yarn build --out-dir /tmp/workspace/dist
+
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - dist/*
+
+  deploy:
+    docker:
+      - image: minio/mc:RELEASE.2019-10-02T19-41-02Z
+
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+
+      - run: |
+          mc config host add aws \
+            https://s3.amazonaws.com \
+            "${S3_ACCESS_KEY}" \
+            "${S3_SECRET_KEY}"
+      - run: mc mirror --remove --overwrite /tmp/workspace/dist aws/encyclopedia-game
+
+workflows:
+  version: 2
+  all:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
