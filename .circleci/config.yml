@@ -1,5 +1,6 @@
 ---
-version: 2
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -7,17 +8,49 @@ jobs:
 
     steps:
       - checkout
-
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-{{ checksum "yarn.lock" }}
             - v1-dependencies-
-
-      - run: yarn install
-
+      - run: yarn install --freeze
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
 
-      - run: yarn build
+      - run: yarn format --check
+
+      - run: mkdir -p /tmp/workspace
+      - run: yarn build --out-dir /tmp/workspace/dist
+
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - dist/*
+
+  deploy:
+    docker:
+      - image: minio/mc:RELEASE.2019-10-02T19-41-02Z
+
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+
+      - run: |
+          mc config host add aws \
+            https://s3.amazonaws.com \
+            "${S3_ACCESS_KEY}" \
+            "${S3_SECRET_KEY}"
+      - run: mc mirror --remove --overwrite /tmp/workspace/dist aws/encyclopedia-game
+
+workflows:
+  version: 2
+  all:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

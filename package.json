@@ -3,7 +3,8 @@
   "scripts": {
     "start": "node scripts/develop.js",
     "storybook": "concurrently 'parcel serve src/views/storybook/storybook.html --port 4321' 'start-storybook --preview-url=http://localhost:4321/iframe.html --config-dir src/views/storybook/'",
-    "build": "parcel build --public-url . src/index.html"
+    "build": "parcel build --public-url . src/index.html",
+    "format": "prettier '**/*.[jt]s?([x])' '**/*.json' '!dist/**/*' '!.cache/**/*'"
   },
   "dependencies": {
     "react": "^16.0.0",
