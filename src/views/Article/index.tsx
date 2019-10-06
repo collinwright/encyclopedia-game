@@ -11,10 +11,10 @@ const pathnameToTitle = (pathname: string) => {
   return decodeURIComponent(encodedTitle).replace(new RegExp("_", "g"), " ");
 };
 
-export default (props: {
-  startingTitle: string | null;
+export default function Article(props: {
+  startingTitle: string | null | undefined;
   onNewArticle?: (title: string) => unknown;
-}) => {
+}) {
   return (
     <iframe
       className="wikimedia-article"
@@ -34,4 +34,4 @@ export default (props: {
       }}
     ></iframe>
   );
-};
+}
