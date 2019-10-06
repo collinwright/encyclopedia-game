@@ -4,7 +4,10 @@ import { ArticlePair } from "../../external/wikimedia";
 
 import "./style.css";
 
-export default (props: { course: ArticlePair; visited: string[] }) => {
+export default function Path(props: {
+  course: ArticlePair;
+  visited: string[];
+}) {
   return (
     <div className="article-path">
       <div>
@@ -39,4 +42,4 @@ export default (props: { course: ArticlePair; visited: string[] }) => {
       </div>
     </div>
   );
-};
+}

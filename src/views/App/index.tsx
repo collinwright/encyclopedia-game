@@ -1,14 +1,16 @@
 import * as React from "react";
 import { hot } from "react-hot-loader";
 
-import { Article, Path } from "../";
+import { Article, Duration, Path } from "../";
 import createWikimediaClient, { Options } from "../../external/wikimedia";
 import { reducer, emptyState } from "../../model";
 
 import "./index.css";
 import useTrueVerticalHeight from "./useTrueVerticalHeight";
 
-export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
+export default hot(module)(function App(props: {
+  wikimediaOptions: Partial<Options>;
+}) {
   const [state, dispatch] = React.useReducer(reducer, undefined, emptyState);
   const wikimedia = React.useMemo(
     () => createWikimediaClient(props.wikimediaOptions),
@@ -21,10 +23,27 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
     <div id="container" ref={container}>
       <div id="controls">
         <h1>The Encyclopedia Game</h1>
-        {state.loading &&
-          "Finding a random pair of articles which are close to one another..."}
+
+        {state.loading && (
+          <p>
+            Finding a random pair of articles which are close to one another...
+          </p>
+        )}
 
         {state.course && <Path course={state.course} visited={state.visited} />}
+
+        {state.startingTime && (
+          <p>
+            {state.finishTime == null
+              ? "You have been playing for "
+              : "You played for "}
+            <Duration
+              startingTime={state.startingTime}
+              endingTime={state.finishTime}
+            />
+            .
+          </p>
+        )}
 
         <hr />
 
@@ -36,7 +55,10 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
             try {
               dispatch({
                 type: "LOADED_COURSE",
-                data: await wikimedia.findArticlePair()
+                data: {
+                  course: await wikimedia.findArticlePair(),
+                  now: new Date()
+                }
               });
             } catch (_) {
               dispatch({ type: "CRITICAL_ERROR" });
@@ -66,7 +88,9 @@ export default hot(module)((props: { wikimediaOptions: Partial<Options> }) => {
       <div id="content">
         <Article
           startingTitle={state.course && state.course.start}
-          onNewArticle={title => dispatch({ type: "DID_VISIT", data: title })}
+          onNewArticle={title =>
+            dispatch({ type: "DID_VISIT", data: { title, now: new Date() } })
+          }
         />
       </div>
     </div>
